@@ -1,0 +1,36 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+  
+pool:
+  vmImage: 'ubuntu-latest'
+  name: Azure Pipelines
+steps:
+- script: |
+   echo "======Show Directory====="
+   pwd
+   
+   echo "======List Files====="
+   ls
+   
+   echo "======Read Files====="
+   cat ./kubeconfig/dev/k8s-deployment-service.yaml
+   
+  displayName: 'Command Line Script'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Hello-World-Config'
+  inputs:
+    PathtoPublish: kubeconfig
+    ArtifactName: 'Hello-World-Config'
+
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
